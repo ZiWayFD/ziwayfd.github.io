@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://ziwayfd.github.io/sitemap.xml
