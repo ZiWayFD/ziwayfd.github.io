@@ -14,7 +14,7 @@
   </url>
   <url>
     <loc>https://ziwayfd.github.io/about.html</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -23,6 +23,30 @@
     <lastmod>2026-06-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ziwayfd.github.io/articles/chinese-astrology-vs-western-astrology.html</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ziwayfd.github.io/articles/human-design-type-meaning.html</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ziwayfd.github.io/articles/numerology-life-path-number-meaning.html</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ziwayfd.github.io/articles/why-five-dimensions-cross-validation-more-accurate.html</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ziwayfd.github.io/articles/why-five-dimensions-not-one.html</loc>
