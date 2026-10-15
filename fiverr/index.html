@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ZiWayFD · Read Your Chinese BaZi Birth Chart — from $10</title>
+<meta name="description" content="A precise Chinese BaZi (Four Pillars) reading from a Tsinghua-trained consultant. One system, done right — then upgrade to the full five-system cross-verification.">
+<style>
+  :root{
+    --bg0:#0c0722; --bg1:#1b1040; --bg2:#2b1a58;
+    --gold:#e8c987; --gold-2:#d9b36a; --gold-soft:rgba(217,179,106,.28);
+    --vermilion:#b3271d; --vermilion-2:#c9392d;
+    --ink:#f2efe9; --ink-2:#cfc9dc; --ink-3:#a49eb8;
+    --line:rgba(217,179,106,.22);
+    --serif:Georgia,'Times New Roman',serif;
+    --sans:-apple-system,'Segoe UI','Microsoft YaHei',system-ui,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg0);color:var(--ink);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased;}
+  a{color:inherit;text-decoration:none;}
+
+  /* cosmic background */
+  .cosmos-bg{position:fixed;inset:0;z-index:-2;background:
+    radial-gradient(90% 70% at 78% 88%, rgba(124,58,237,.28) 0%, rgba(124,58,237,0) 55%),
+    radial-gradient(70% 60% at 10% 92%, rgba(96,64,190,.26) 0%, rgba(96,64,190,0) 55%),
+    radial-gradient(120% 90% at 50% 118%, rgba(64,42,140,.36) 0%, rgba(64,42,140,0) 60%),
+    radial-gradient(130% 130% at 38% 18%, var(--bg2) 0%, var(--bg1) 46%, var(--bg0) 100%);}
+  .cosmos-svg{position:fixed;inset:0;z-index:-1;width:100%;height:100%;opacity:.9;pointer-events:none;}
+
+  .wrap{max-width:980px;margin:0 auto;padding:0 22px;}
+
+  /* top bar */
+  .topbar{display:flex;justify-content:space-between;align-items:center;padding:22px 0 6px;}
+  .logo{font-size:24px;font-weight:800;letter-spacing:-.5px;color:#f0f0f0;}
+  .logo b{color:var(--gold);}
+  .topbar .nav{font-size:13px;color:var(--ink-3);}
+  .topbar .nav a{color:var(--gold);border-bottom:1px solid var(--gold-soft);}
+
+  /* hero */
+  .hero{text-align:center;padding:54px 0 30px;position:relative;}
+  .kicker{font-family:var(--serif);font-size:15px;letter-spacing:6px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:20px;}
+  .kicker .dia{font-size:11px;vertical-align:2px;opacity:.85;}
+  h1{font-size:clamp(44px,9vw,82px);line-height:1.02;font-weight:800;letter-spacing:-2px;color:#f5f2ec;}
+  h1 .accent{color:var(--gold);}
+  .hero-sub{margin:22px auto 0;max-width:620px;font-size:17px;color:var(--ink-2);}
+  .hero-sub b{color:var(--gold);font-weight:600;}
+  .cta-row{margin-top:30px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+  .btn{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(180deg,#e8c987,#cda85a);color:#241405;font-weight:800;font-size:17px;padding:15px 30px;border-radius:999px;box-shadow:0 8px 30px rgba(217,179,106,.30);transition:transform .15s ease, box-shadow .15s ease;}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 12px 38px rgba(217,179,106,.42);}
+  .btn.ghost{background:transparent;color:var(--gold);border:1px solid var(--gold-soft);box-shadow:none;font-weight:600;font-size:15px;padding:14px 24px;}
+  .trust{margin-top:26px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+  .chip{font-size:13px;color:var(--ink-3);border:1px solid var(--line);border-radius:999px;padding:7px 15px;background:rgba(255,255,255,.02);}
+  .chip b{color:var(--gold);font-weight:600;}
+
+  /* seal */
+  .seal{position:absolute;right:0;top:30px;width:74px;height:74px;transform:rotate(3deg);filter:drop-shadow(0 4px 18px rgba(179,39,29,.5));}
+
+  /* sections */
+  section{padding:46px 0;border-top:1px solid var(--line);}
+  .eyebrow{font-family:var(--serif);font-size:13px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;}
+  h2{font-size:clamp(26px,4.5vw,38px);font-weight:800;letter-spacing:-1px;line-height:1.15;margin-bottom:18px;}
+  .lead{font-size:17px;color:var(--ink-2);max-width:680px;}
+  .lead b{color:var(--gold);font-weight:600;}
+
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:26px;}
+  .card{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:16px;padding:20px 22px;}
+  .card h3{font-size:17px;color:var(--gold);margin-bottom:8px;font-weight:700;}
+  .card p{font-size:15px;color:var(--ink-2);}
+
+  /* ladder */
+  .ladder{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px;}
+  .tier{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:16px;padding:22px 20px;position:relative;overflow:hidden;}
+  .tier.feat{border-color:rgba(217,179,106,.5);box-shadow:0 0 0 1px rgba(217,179,106,.25) inset;}
+  .tier .price{font-size:30px;font-weight:800;color:#f5f2ec;letter-spacing:-1px;}
+  .tier .name{font-size:14px;color:var(--gold);font-weight:700;margin:6px 0 12px;letter-spacing:.5px;}
+  .tier ul{list-style:none;font-size:14px;color:var(--ink-2);}
+  .tier li{padding:5px 0;border-top:1px solid rgba(217,179,106,.12);}
+  .tier li:first-child{border-top:none;}
+
+  .note{margin-top:22px;font-size:14px;color:var(--ink-3);border-left:3px solid var(--gold-soft);padding:10px 16px;background:rgba(217,179,106,.05);border-radius:0 8px 8px 0;}
+  .note b{color:var(--gold);}
+
+  /* gallery */
+  .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:26px;}
+  .gallery img{width:100%;border-radius:12px;border:1px solid var(--line);display:block;}
+  .video-wrap{margin-top:22px;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:#000;}
+  .video-wrap video{width:100%;display:block;}
+
+  /* faq */
+  .faq{margin-top:22px;}
+  .faq details{border-top:1px solid var(--line);padding:14px 2px;}
+  .faq summary{font-size:16px;font-weight:600;color:#efe9da;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;}
+  .faq summary::-webkit-details-marker{display:none;}
+  .faq summary::after{content:"+";color:var(--gold);font-size:22px;font-weight:400;}
+  .faq details[open] summary::after{content:"\2212";}
+  .faq p{margin-top:10px;font-size:15px;color:var(--ink-2);}
+
+  /* final cta */
+  .final{text-align:center;padding:60px 0 30px;}
+  .final h2{margin-bottom:14px;}
+  .final .lead{margin:0 auto 26px;}
+
+  footer{padding:34px 0 50px;border-top:1px solid var(--line);font-size:13px;color:var(--ink-3);text-align:center;}
+  footer a{color:var(--gold);}
+  footer .disc{margin-top:8px;opacity:.8;}
+
+  @media (max-width:760px){
+    .grid,.ladder,.gallery{grid-template-columns:1fr;}
+    .seal{width:56px;height:56px;top:14px;}
+    .hero{padding-top:30px;}
+    .topbar .nav{display:none;}
+  }
+</style>
+</head>
+<body>
+<div class="cosmos-bg"></div>
+<svg class="cosmos-svg" viewBox="0 0 1280 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+  <g opacity="0.13" stroke="#d9b36a" fill="none">
+    <circle cx="640" cy="400" r="330" stroke-width="1.2"/>
+    <circle cx="640" cy="400" r="368" stroke-width="0.9" stroke-dasharray="2 7"/>
+  </g>
+  <g fill="#d9b36a" opacity="0.18" font-family="serif" font-size="34" text-anchor="middle">
+    <text x="640" y="72">☰</text><text x="884" y="172">☱</text><text x="985" y="414">☲</text><text x="884" y="660">☳</text>
+    <text x="640" y="758">☴</text><text x="396" y="660">☵</text><text x="295" y="414">☶</text><text x="396" y="172">☷</text>
+  </g>
+  <g fill="#e8c987" opacity="0.85">
+    <circle cx="120" cy="110" r="2.6"/><circle cx="235" cy="58" r="3.4"/><circle cx="355" cy="118" r="2.6"/>
+    <circle cx="470" cy="72" r="3.2"/><circle cx="1010" cy="120" r="2.8"/><circle cx="1120" cy="205" r="3.4"/>
+    <circle cx="1150" cy="330" r="2.8"/><circle cx="90" cy="590" r="2.6"/><circle cx="170" cy="668" r="3.2"/>
+    <circle cx="1180" cy="560" r="2.8"/><circle cx="1095" cy="640" r="3"/>
+  </g>
+  <g fill="#ffffff" opacity="0.5">
+    <circle cx="200" cy="220" r="1.2"/><circle cx="700" cy="60" r="1.3"/><circle cx="920" cy="70" r="1.5"/>
+    <circle cx="1230" cy="260" r="1.3"/><circle cx="540" cy="730" r="1"/><circle cx="250" cy="740" r="1.4"/>
+    <circle cx="40" cy="420" r="1.3"/><circle cx="760" cy="180" r="0.9"/><circle cx="960" cy="480" r="1.2"/>
+  </g>
+</svg>
+
+<div class="wrap">
+  <div class="topbar">
+    <div class="logo">Zi<b>Way</b>FD</div>
+    <div class="nav"><a href="https://ziwayfd.github.io" target="_blank" rel="noopener">ziwayfd.github.io</a></div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <svg class="seal" viewBox="0 0 74 74" width="74" height="74" aria-label="ZiWay seal">
+      <defs>
+        <radialGradient id="sf" cx="35%" cy="28%" r="90%">
+          <stop offset="0%" stop-color="#c9392d"/><stop offset="55%" stop-color="#b3271d"/><stop offset="100%" stop-color="#8c1b13"/>
+        </radialGradient>
+      </defs>
+      <rect x="1" y="1" width="72" height="72" rx="13" fill="url(#sf)"/>
+      <rect x="5" y="5" width="64" height="64" rx="9" fill="none" stroke="#f8ecd6" stroke-width="1.7" opacity="0.8"/>
+      <text x="37" y="50" text-anchor="middle" font-family="STKaiti,'KaiTi','Songti SC',serif" font-size="40" fill="#f8ecd6" font-weight="700">紫</text>
+    </svg>
+    <div class="kicker"><span class="dia">✦</span>&nbsp; Chinese BaZi Reading &nbsp;<span class="dia">✦</span></div>
+    <h1>READ YOUR<br><span class="accent">BIRTH CHART</span></h1>
+    <p class="hero-sub">A precise Chinese <b>BaZi (Four Pillars)</b> reading from a Tsinghua-trained consultant. One system, done right — starting at <b>$10</b>.</p>
+    <div class="cta-row">
+      <a class="btn" href="https://www.fiverr.com/ziwayfd/read-your-chinese-bazi-birth-chart" target="_blank" rel="noopener">Get your BaZi reading →</a>
+      <a class="btn ghost" href="#upgrade">See the 5-system upgrade</a>
+    </div>
+    <div class="trust">
+      <span class="chip">Tsinghua-trained consultant</span>
+      <span class="chip"><b>5–8 page</b> written PDF</span>
+      <span class="chip">English or <b>中文</b></span>
+    </div>
+  </div>
+</div>
+
+<!-- WHAT YOU GET -->
+<section><div class="wrap">
+  <div class="eyebrow">What you receive · $10</div>
+  <h2>Your Four Pillars, mapped and explained</h2>
+  <p class="lead">You send your birth date, time and city. I return a written reading of your BaZi chart — the four pillars of year, month, day and hour — in plain language, with one clear next step.</p>
+  <div class="grid">
+    <div class="card"><h3>Your full chart</h3><p>Year, month, day and hour pillars calculated from your exact birth data — not a template.</p></div>
+    <div class="card"><h3>Element & day-master</h3><p>What your day-master and element balance say about your natural tendencies and pressures.</p></div>
+    <div class="card"><h3>Key life themes</h3><p>The patterns that show up most clearly in your chart, explained without mysticism.</p></div>
+    <div class="card"><h3>One concrete next step</h3><p>A single, actionable suggestion — not a vague forecast. Delivered in 2 days, 1 revision included.</p></div>
+  </div>
+</div></section>
+
+<!-- UPGRADE -->
+<section id="upgrade"><div class="wrap">
+  <div class="eyebrow">The bigger picture</div>
+  <h2>One system is a start. Five is a signal.</h2>
+  <p class="lead">ZiWay FD cross-verifies <b>five independent systems</b> — Western astrology, Chinese BaZi, Numerology, Human Design and blood type. Where they agree, that agreement is your signal. Where they differ, you get an honest caveat instead of a forced story.</p>
+  <div class="ladder">
+    <div class="tier">
+      <div class="price">$55</div>
+      <div class="name">ONE-SYSTEM</div>
+      <ul><li>Pick 1 of 5 systems</li><li>5–10 page PDF</li><li>Key themes + 1 next step</li></ul>
+    </div>
+    <div class="tier feat">
+      <div class="price">$125</div>
+      <div class="name">TWO-SYSTEM CROSS</div>
+      <ul><li>Pick 2 systems, cross-checked</li><li>~12 page PDF</li><li>Where they agree = signal</li><li>Honest notes where they differ</li></ul>
+    </div>
+    <div class="tier">
+      <div class="price">$195</div>
+      <div class="name">FIVE-DIMENSION FD</div>
+      <ul><li>All 5 systems, cross-verified</li><li>~20 page PDF</li><li>12-month timing map</li><li>3 Q&A questions</li></ul>
+    </div>
+  </div>
+  <div class="note">After your $10 reading, I can send a <b>custom offer</b> to deepen into the full five-system report. It is a Fiverr-native upgrade — no links, no pressure. Many buyers start with BaZi, then upgrade once they see how the systems line up.</div>
+</div></section>
+
+<!-- SAMPLE -->
+<section><div class="wrap">
+  <div class="eyebrow">A look inside</div>
+  <h2>See the style before you order</h2>
+  <p class="lead">The same calm, plain-language format your reading will use.</p>
+  <div class="gallery">
+    <img src="images/gig_lead1_v3.png" alt="BaZi reading hero">
+    <img src="images/gig_lead2_v3.png" alt="Four Pillars motif">
+    <img src="images/gig_lead3_v3.png" alt="English or Chinese delivery">
+  </div>
+  <div class="video-wrap">
+    <video controls preload="metadata" poster="images/gig_lead1_v3.png">
+      <source src="video/ZiWayFD_Gig_Promo_v3.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="cta-row" style="margin-top:24px;">
+    <a class="btn" href="https://www.fiverr.com/ziwayfd/read-your-chinese-bazi-birth-chart" target="_blank" rel="noopener">Start with the $10 BaZi reading →</a>
+  </div>
+</div></section>
+
+<!-- FAQ -->
+<section><div class="wrap">
+  <div class="eyebrow">Questions</div>
+  <h2>Before you order</h2>
+  <div class="faq">
+    <details open><summary>Is this fortune telling?</summary><p>No. It is a cross-verified insight reading. I show where the systems agree or disagree; I do not claim to predict a fixed fate. Decision support, not fortune telling.</p></details>
+    <details><summary>What do you need from me?</summary><p>Your full birth date, exact birth time (as precise as you can), and birth city. Report language (English or 中文) — your choice.</p></details>
+    <details><summary>My birth time isn't exact — can you still read me?</summary><p>Often, yes. BaZi reads best with a precise time, but many charts still make sense with an approximate one. Message me first and I'll tell you what's still readable before you order.</p></details>
+    <details><summary>How is the $10 reading different from the $55+ reports?</summary><p>The $10 reading covers BaZi (Four Pillars) only — one system, done right. The $55–$195 reports add more systems and cross-verification. The $10 is the honest entry point; the upgrade is optional.</p></details>
+  </div>
+</div></section>
+
+<!-- FINAL CTA -->
+<div class="final wrap">
+  <h2>Read your birth chart today</h2>
+  <p class="lead">From $10. A written BaZi reading in English or 中文, delivered in 2 days.</p>
+  <a class="btn" href="https://www.fiverr.com/ziwayfd/read-your-chinese-bazi-birth-chart" target="_blank" rel="noopener">Get your BaZi reading →</a>
+</div>
+
+<footer>
+  <div>ZiWayFD · Five-Dimension cross-verification · <a href="https://ziwayfd.github.io" target="_blank" rel="noopener">ziwayfd.github.io</a></div>
+  <div class="disc">Decision support, not fortune telling, not a substitute for professional advice.</div>
+</footer>
+
+</body>
+</html>
